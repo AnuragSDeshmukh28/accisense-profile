@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AcciSense Driver Profile</title>
+
+<style>
+
+body{
+margin:0;
+font-family: Arial, Helvetica, sans-serif;
+background:#f4f6fb;
+}
+
+/* Header */
+
+.header{
+background: linear-gradient(135deg,#1b3c73,#4a6cf7);
+color:white;
+text-align:center;
+padding:35px 20px;
+font-size:26px;
+font-weight:bold;
+}
+
+/* Main container */
+
+.container{
+padding:20px;
+max-width:420px;
+margin:auto;
+}
+
+/* Card */
+
+.card{
+background:white;
+border-radius:15px;
+box-shadow:0 6px 15px rgba(0,0,0,0.15);
+padding:25px;
+margin-top:-40px;
+}
+
+/* Profile circle */
+
+.profile{
+width:90px;
+height:90px;
+background:#e6ecff;
+border-radius:50%;
+margin:auto;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:40px;
+color:#1b3c73;
+font-weight:bold;
+}
+
+/* Title */
+
+.title{
+text-align:center;
+font-size:20px;
+margin-top:10px;
+color:#1b3c73;
+font-weight:bold;
+}
+
+/* Info rows */
+
+.info{
+margin-top:20px;
+font-size:16px;
+color:#444;
+}
+
+.info p{
+margin:8px 0;
+}
+
+/* Buttons */
+
+.btn{
+width:100%;
+padding:14px;
+border:none;
+border-radius:8px;
+margin-top:15px;
+font-size:16px;
+cursor:pointer;
+}
+
+.call{
+background:#ff4d4d;
+color:white;
+}
+
+.map{
+background:#1b3c73;
+color:white;
+}
+
+.footer{
+text-align:center;
+font-size:12px;
+margin-top:20px;
+color:#777;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+AcciSense Emergency Profile
+</div>
+
+<div class="container">
+
+<div class="card">
+
+<div class="profile">
+👤
+</div>
+
+<div class="title" id="name">
+Driver Name
+</div>
+
+<div class="info">
+
+<p id="phone"></p>
+<p id="vehicle"></p>
+<p id="blood"></p>
+<p id="emergency"></p>
+
+</div>
+
+<a id="callBtn">
+<button class="btn call">📞 Call Emergency Contact</button>
+</a>
+
+<a id="mapBtn">
+<button class="btn map">📍 Open Location</button>
+</a>
+
+<div class="footer">
+AcciSense Smart Accident Detection System
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+
+const name = params.get("name");
+const phone = params.get("phone");
+const vehicle = params.get("vehicle");
+const blood = params.get("blood");
+const emergency = params.get("emergency");
+const lat = params.get("lat");
+const lon = params.get("lon");
+
+document.getElementById("name").innerText = name;
+document.getElementById("phone").innerText = "Phone: " + phone;
+document.getElementById("vehicle").innerText = "Vehicle: " + vehicle;
+document.getElementById("blood").innerText = "Blood Group: " + blood;
+document.getElementById("emergency").innerText = "Emergency Contact: " + emergency;
+
+document.getElementById("callBtn").href = "tel:"+emergency;
+
+document.getElementById("mapBtn").href =
+"https://maps.google.com/?q="+lat+","+lon;
+
+</script>
+
+</body>
+</html>
