@@ -6,7 +6,6 @@
 <title>AcciSense Driver Profile</title>
 
 <style>
-
 body{
     margin:0;
     font-family: Arial, Helvetica, sans-serif;
@@ -88,14 +87,6 @@ body{
     color:white;
 }
 
-.footer{
-    text-align:center;
-    font-size:12px;
-    margin-top:20px;
-    color:#777;
-}
-
-/* Additional button colors */
 .notify{
     background:#4CAF50;
     color:white;
@@ -106,6 +97,20 @@ body{
     color:white;
 }
 
+.footer{
+    text-align:center;
+    font-size:12px;
+    margin-top:20px;
+    color:#777;
+}
+
+#map {
+    width:100%;
+    height:300px;
+    margin-top:20px;
+    border-radius:15px;
+    overflow:hidden;
+}
 </style>
 
 </head>
@@ -121,10 +126,7 @@ body{
     <div class="card">
 
         <div class="profile" id="profileIcon">👤</div>
-
-        <div class="title" id="name">
-            Loading...
-        </div>
+        <div class="title" id="name">Loading...</div>
 
         <div class="info">
             <p id="phone"></p>
@@ -135,9 +137,11 @@ body{
 
         <!-- Action Buttons -->
         <a id="callBtn"><button class="btn call">📞 Call Emergency Contact</button></a>
-        <a id="mapBtn"><button class="btn map">📍 Open Location</button></a>
         <a id="notifyBtn"><button class="btn notify">📢 Notify Owner</button></a>
         <a id="reportBtn"><button class="btn report">⚠️ Report Accident</button></a>
+
+        <!-- Map -->
+        <div id="map">Loading map...</div>
 
         <div class="footer">
             AcciSense Smart Accident Detection System
@@ -152,7 +156,6 @@ body{
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
 <script>
-
 var firebaseConfig = {
     apiKey: "AIzaSyBehsxz13FrWsAsMp3YzC7uoQVE2NMjQiM",
     authDomain: "accisense.firebaseapp.com",
@@ -186,6 +189,7 @@ firebase.database().ref("Users/Driver/" + driverId)
         return;
     }
 
+    // Set driver info
     document.getElementById("name").innerText = data.name || "Unknown";
     document.getElementById("phone").innerText = "Phone Number: " + (data.phone || "Not available");
     document.getElementById("vehicle").innerText = "Vehicle plate no: " + (data.vehicle || "Not available");
@@ -198,17 +202,12 @@ firebase.database().ref("Users/Driver/" + driverId)
         document.getElementById("profileIcon").innerText = initials;
     }
 
+    // ========== Buttons ==========
+
     // Call Emergency Contact
     if(data.emergencyPhone){
         document.getElementById("callBtn").href = "tel:" + data.emergencyPhone;
     }
-
-    // Open Map
-    if(data.lat && data.lon){
-        document.getElementById("mapBtn").href = "https://maps.google.com/?q=" + data.lat + "," + data.lon;
-    }
-
-    // ================== Helper Actions ==================
 
     // Notify Owner
     document.getElementById("notifyBtn").addEventListener("click", function(){
@@ -243,6 +242,23 @@ firebase.database().ref("Users/Driver/" + driverId)
             alert("Owner contact not available.");
         }
     });
+
+    // ========== Map ==========
+
+    if(data.lat && data.lon){
+        document.getElementById("map").innerHTML = `
+            <iframe
+            width="100%"
+            height="300"
+            src="https://maps.google.com/maps?q=${data.lat},${data.lon}&hl=es;z=17&output=embed"
+            frameborder="0"
+            style="border:0"
+            allowfullscreen>
+            </iframe>
+        `;
+    } else {
+        document.getElementById("map").innerText = "Location not available";
+    }
 
 })
 .catch(function(error){
