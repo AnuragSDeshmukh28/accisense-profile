@@ -8,91 +8,102 @@
 <style>
 
 body{
-margin:0;
-font-family: Arial, Helvetica, sans-serif;
-background:#f4f6fb;
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+    background:#f4f6fb;
 }
 
 .header{
-background: linear-gradient(135deg,#1b3c73,#4a6cf7);
-color:white;
-text-align:center;
-padding:35px 20px;
-font-size:26px;
-font-weight:bold;
+    background: linear-gradient(135deg,#1b3c73,#4a6cf7);
+    color:white;
+    text-align:center;
+    padding:35px 20px;
+    font-size:26px;
+    font-weight:bold;
 }
 
 .container{
-padding:20px;
-max-width:420px;
-margin:auto;
+    padding:20px;
+    max-width:420px;
+    margin:auto;
 }
 
 .card{
-background:white;
-border-radius:15px;
-box-shadow:0 6px 15px rgba(0,0,0,0.15);
-padding:25px;
-margin-top:-40px;
+    background:white;
+    border-radius:15px;
+    box-shadow:0 6px 15px rgba(0,0,0,0.15);
+    padding:25px;
+    margin-top:-40px;
 }
 
 .profile{
-width:90px;
-height:90px;
-background:#e6ecff;
-border-radius:50%;
-margin:auto;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:36px;
-color:#1b3c73;
-font-weight:bold;
+    width:90px;
+    height:90px;
+    background:#e6ecff;
+    border-radius:50%;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:36px;
+    color:#1b3c73;
+    font-weight:bold;
 }
 
 .title{
-text-align:center;
-font-size:20px;
-margin-top:10px;
-color:#1b3c73;
-font-weight:bold;
+    text-align:center;
+    font-size:20px;
+    margin-top:10px;
+    color:#1b3c73;
+    font-weight:bold;
 }
 
 .info{
-margin-top:20px;
-font-size:16px;
-color:#444;
+    margin-top:20px;
+    font-size:16px;
+    color:#444;
 }
 
 .info p{
-margin:8px 0;
+    margin:8px 0;
 }
 
 .btn{
-width:100%;
-padding:14px;
-border:none;
-border-radius:8px;
-margin-top:15px;
-font-size:16px;
-cursor:pointer;
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:8px;
+    margin-top:15px;
+    font-size:16px;
+    cursor:pointer;
 }
 
 .call{
-background:#ff4d4d;
-color:white;
+    background:#ff4d4d;
+    color:white;
 }
 
 .map{
-background:#1b3c73;
-color:white;
+    background:#1b3c73;
+    color:white;
 }
 
 .footer{
-text-align:center;
-font-size:12px;
-margin-top:20px;
-color:#777;
+    text-align:center;
+    font-size:12px;
+    margin-top:20px;
+    color:#777;
+}
+
+/* Additional button colors */
+.notify{
+    background:#4CAF50;
+    color:white;
+}
+
+.report{
+    background:#FF9800;
+    color:white;
 }
 
 </style>
@@ -102,41 +113,37 @@ color:#777;
 <body>
 
 <div class="header">
-AcciSense Emergency Profile
+    AcciSense Emergency Profile
 </div>
 
 <div class="container">
 
-<div class="card">
+    <div class="card">
 
-<div class="profile" id="profileIcon">👤</div>
+        <div class="profile" id="profileIcon">👤</div>
 
-<div class="title" id="name">
-Loading...
-</div>
+        <div class="title" id="name">
+            Loading...
+        </div>
 
-<div class="info">
+        <div class="info">
+            <p id="phone"></p>
+            <p id="vehicle"></p>
+            <p id="blood"></p>
+            <p id="emergency"></p>
+        </div>
 
-<p id="phone"></p>
-<p id="vehicle"></p>
-<p id="blood"></p>
-<p id="emergency"></p>
+        <!-- Action Buttons -->
+        <a id="callBtn"><button class="btn call">📞 Call Emergency Contact</button></a>
+        <a id="mapBtn"><button class="btn map">📍 Open Location</button></a>
+        <a id="notifyBtn"><button class="btn notify">📢 Notify Owner</button></a>
+        <a id="reportBtn"><button class="btn report">⚠️ Report Accident</button></a>
 
-</div>
+        <div class="footer">
+            AcciSense Smart Accident Detection System
+        </div>
 
-<a id="callBtn">
-<button class="btn call">📞 Call Emergency Contact</button>
-</a>
-
-<a id="mapBtn">
-<button class="btn map">📍 Open Location</button>
-</a>
-
-<div class="footer">
-AcciSense Smart Accident Detection System
-</div>
-
-</div>
+    </div>
 
 </div>
 
@@ -147,13 +154,13 @@ AcciSense Smart Accident Detection System
 <script>
 
 var firebaseConfig = {
-  apiKey: "AIzaSyBehsxz13FrWsAsMp3YzC7uoQVE2NMjQiM",
-  authDomain: "accisense.firebaseapp.com",
-  databaseURL: "https://accisense-default-rtdb.firebaseio.com",
-  projectId: "accisense",
-  storageBucket: "accisense.firebasestorage.app",
-  messagingSenderId: "275667875379",
-  appId: "1:275667875379:web:99091277d5d2dad5e39546"
+    apiKey: "AIzaSyBehsxz13FrWsAsMp3YzC7uoQVE2NMjQiM",
+    authDomain: "accisense.firebaseapp.com",
+    databaseURL: "https://accisense-default-rtdb.firebaseio.com",
+    projectId: "accisense",
+    storageBucket: "accisense.firebasestorage.app",
+    messagingSenderId: "275667875379",
+    appId: "1:275667875379:web:99091277d5d2dad5e39546"
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -162,11 +169,9 @@ firebase.initializeApp(firebaseConfig);
 const params = new URLSearchParams(window.location.search);
 const driverId = params.get("id");
 
-console.log("Driver ID:", driverId);
-
 if(!driverId){
-document.getElementById("name").innerText = "Invalid QR Code";
-throw new Error("Driver ID missing");
+    document.getElementById("name").innerText = "Invalid QR Code";
+    throw new Error("Driver ID missing");
 }
 
 // Fetch driver data
@@ -174,49 +179,75 @@ firebase.database().ref("Users/Driver/" + driverId)
 .once("value")
 .then(function(snapshot){
 
-console.log("Snapshot:", snapshot.val());
+    const data = snapshot.val();
 
-var data = snapshot.val();
+    if(!data){
+        document.getElementById("name").innerText = "Driver data not found";
+        return;
+    }
 
+    document.getElementById("name").innerText = data.name || "Unknown";
+    document.getElementById("phone").innerText = "Phone Number: " + (data.phone || "Not available");
+    document.getElementById("vehicle").innerText = "Vehicle plate no: " + (data.vehicle || "Not available");
+    document.getElementById("blood").innerText = "Blood Group: " + (data.blood || "Not available");
+    document.getElementById("emergency").innerText = "Family Member Contact No.: " + (data.emergencyPhone || "Not available");
 
-console.log("Driver Data:", data);
+    // Profile initials
+    if(data.name){
+        let initials = data.name.split(" ").map(n => n[0]).join("");
+        document.getElementById("profileIcon").innerText = initials;
+    }
 
-document.getElementById("name").innerText = data.name || "Unknown";
+    // Call Emergency Contact
+    if(data.emergencyPhone){
+        document.getElementById("callBtn").href = "tel:" + data.emergencyPhone;
+    }
 
-document.getElementById("phone").innerText =
-"Phone: " + (data.phone || "Not available");
+    // Open Map
+    if(data.lat && data.lon){
+        document.getElementById("mapBtn").href = "https://maps.google.com/?q=" + data.lat + "," + data.lon;
+    }
 
-document.getElementById("vehicle").innerText =
-"Vehicle: " + (data.vehicle || "Not available");
+    // ================== Helper Actions ==================
 
-document.getElementById("blood").innerText =
-"Blood Group: " + (data.blood || "Not available");
+    // Notify Owner
+    document.getElementById("notifyBtn").addEventListener("click", function(){
+        const ownerPhone = data.phone;
+        const vehicleNum = data.vehicle || "Unknown Vehicle";
+        let locationLink = "Location not available";
+        if(data.lat && data.lon){
+            locationLink = `https://maps.google.com/?q=${data.lat},${data.lon}`;
+        }
+        if(ownerPhone){
+            window.location.href = `sms:${ownerPhone}?body=Your vehicle (${vehicleNum}) has been reported by someone at location ${locationLink}. Please check.`;
+            alert("Owner notified!");
+        } else {
+            alert("Owner contact not available.");
+        }
+    });
 
-document.getElementById("emergency").innerText =
-"Emergency Contact: " + (data.emergencyPhone || "Not available");
-
-// Call button
-if(data.emergencyPhone){
-document.getElementById("callBtn").href =
-"tel:" + data.emergencyPhone;
-}
-
-// Map button
-if(data.lat && data.lon){
-document.getElementById("mapBtn").href =
-"https://maps.google.com/?q="+data.lat+","+data.lon;
-}
-
-// Profile initials
-if(data.name){
-let initials = data.name.split(" ").map(n => n[0]).join("");
-document.getElementById("profileIcon").innerText = initials;
-}
+    // Report Accident
+    document.getElementById("reportBtn").addEventListener("click", function(){
+        const ownerPhone = data.phone;
+        const name = data.name || "Unknown";
+        const vehicleNum = data.vehicle || "Unknown Vehicle";
+        let locationLink = "Location not available";
+        if(data.lat && data.lon){
+            locationLink = `https://maps.google.com/?q=${data.lat},${data.lon}`;
+        }
+        const message = `ALERT! Possible accident detected for ${name}, Vehicle: ${vehicleNum}. Location: ${locationLink}. Please respond immediately!`;
+        if(ownerPhone){
+            window.location.href = `sms:${ownerPhone}?body=${encodeURIComponent(message)}`;
+            alert("Accident report sent to owner!");
+        } else {
+            alert("Owner contact not available.");
+        }
+    });
 
 })
 .catch(function(error){
-console.error("Firebase Error:", error);
-document.getElementById("name").innerText = "Error loading data";
+    console.error("Firebase Error:", error);
+    document.getElementById("name").innerText = "Error loading data";
 });
 
 </script>
